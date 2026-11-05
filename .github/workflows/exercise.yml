@@ -1,0 +1,32 @@
+name: Exercise workflow
+
+on:
+  push: 
+    branches: [main]
+  pull_request: 
+    branches: [main]
+  
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name : Print Message
+        run: echo "Building " 
+        
+  test:
+    runs-on: ubuntu-24.04
+    needs:  build
+    steps:
+      - name: Print Message
+        run: echo "Testing"
+    
+  deploy:
+    runs-on: ubuntu-24.04
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Print Message
+        run: echo "Deploying"
+  
