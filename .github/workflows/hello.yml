@@ -8,6 +8,13 @@ on:
   workflow_dispatch:
 
 jobs:
+
+
+  deploy:
+      runs-on: ubuntu-24.04
+      if: github.ref=='refs/latest/main'
+      steps:
+            - run: echo "Deploying to production"
   hello:
     runs-on: ubuntu-24.04
     steps:
@@ -26,9 +33,15 @@ jobs:
   test:
     runs-on: ubuntu-24.04
     needs: build
-    env:
-          STAGE: test
+    
     steps:
       - name: Print message
         run: echo "Running tests in $STAGE stage"
+    env:
+          STAGE: test
+          
+
+    
+        
+
     
