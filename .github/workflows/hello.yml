@@ -1,5 +1,7 @@
 name: Hello World
 
+env:
+      APP_ENV: development
 on:
   push:
     branches: [main]
@@ -14,3 +16,17 @@ jobs:
 
       - name: Print message
         run: echo "Hello, GitHub Actions!"
+        
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Print message
+        run: echo "Building Project in $APP_ENV"
+        
+  test:
+    runs-on: ubuntu-24.04
+    needs: build
+    steps:
+      - name: Print message
+        run: echo "Running tests"
+    
