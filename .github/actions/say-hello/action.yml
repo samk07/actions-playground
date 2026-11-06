@@ -1,0 +1,17 @@
+name: Say Hello
+description: Print a greeting
+
+inputs:
+  name:
+    description: "Name to greet"
+    required: false
+    default: "World"
+
+runs:
+  using: composite
+  steps:
+    - name: Print greeting
+      shell: bash
+      env:
+        NAME: ${{ inputs.name }}
+      run: echo "Hello, $NAME!"
